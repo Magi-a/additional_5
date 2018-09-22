@@ -7,20 +7,17 @@ module.exports = function check(str, bracketsConfig) {
   var c = [];
 
   for(let i = 0; i < bracketsConfig.length; i++){
-/*
+
     if(bracketsConfig[i][0] === bracketsConfig[i][1]){
-
       c.push(bracketsConfig[i][0]);
+    } 
 
-    } else {
-      a[i] = bracketsConfig[i][0];
-      b[i] = bracketsConfig[i][1];
-    }
-*/
     a[i] = bracketsConfig[i][0];
     b[i] = bracketsConfig[i][1];
+    
   }
   
+  console.log(c);
 
   // checking
 
@@ -42,30 +39,40 @@ module.exports = function check(str, bracketsConfig) {
 
     } else {
 
-      var id = a.indexOf(stack[stack.length-1]);
+      //special
 
-      // check pair
-      if(b[id] === str[i]){
+      if(c.indexOf(str[i]) !== -1){
 
-        // close brackets
-        stack.pop();
+        var id = c.indexOf(stack[stack.length-1]);
 
-      } else if(b.indexOf(str[i]) === -1){
+        if(c[id] === str[i]){
 
-        stack.push(str[i]);
+          // close brackets
+          stack.pop();
 
-      } else if(a.indexOf(str[i]) === -1){
-        return false;
-        console.log('early close!');
+        } else {
+
+          stack.push(str[i]);
+
+        } 
+      } else {
+        var id = a.indexOf(stack[stack.length-1]);
+
+        // check pair
+        if(b[id] === str[i]){
+
+          // close brackets
+          stack.pop();
+
+        } else if(b.indexOf(str[i]) === -1){
+
+          stack.push(str[i]);
+
+        } else if(a.indexOf(str[i]) === -1){
+          return false;
+          console.log('early close!');
+        }
       }
-        
-
-  
-
-     
-
-
-
 
     }
 
